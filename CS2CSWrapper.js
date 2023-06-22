@@ -18,8 +18,6 @@ class CS2CSWrapper {
         `%.${this.precision}f`,
       ];
 
-      console.log(args.join(" "));
-
       const subprocess = spawn(command, args);
 
       // Prepare the input point string

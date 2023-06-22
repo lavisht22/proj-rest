@@ -1,12 +1,16 @@
-// Create an express server listening on port 3000
 const express = require("express");
-const app = express();
 const Joi = require("joi");
+const morgan = require("morgan");
 
 const CS2CS2 = require("./CS2CSWrapper");
 
+const app = express();
+
 // Enable JSON parsing for req.body
 app.use(express.json());
+
+// Enable logging for production
+app.use(morgan("combined"));
 
 // Create a route for GET / that returns a message "Hello World"
 app.get("/", (req, res) => {

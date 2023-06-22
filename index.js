@@ -14,14 +14,16 @@ app.use(cors());
 app.use(express.json());
 
 // Enable logging for production
-app.use(morgan("combined"), {
-  skip: function (req, res) {
-    if (req.url === "/") {
-      return true;
-    }
-    return false;
-  },
-});
+app.use(
+  morgan("combined", {
+    skip: function (req, res) {
+      if (req.url === "/") {
+        return true;
+      }
+      return false;
+    },
+  })
+);
 
 // Create a route for GET / that returns a message "Hello World"
 app.get("/", (req, res) => {

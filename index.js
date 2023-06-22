@@ -1,16 +1,27 @@
 const express = require("express");
 const Joi = require("joi");
 const morgan = require("morgan");
+const cors = require("cors");
 
 const CS2CS2 = require("./CS2CSWrapper");
 
 const app = express();
 
+// Enable CORS
+app.use(cors());
+
 // Enable JSON parsing for req.body
 app.use(express.json());
 
 // Enable logging for production
-app.use(morgan("combined"));
+app.use(morgan("combined"), {
+  skip: function (req, res) {
+    if (req.url === "/") {
+      return true;
+    }
+    return false;
+  },
+});
 
 // Create a route for GET / that returns a message "Hello World"
 app.get("/", (req, res) => {
